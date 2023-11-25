@@ -25,6 +25,12 @@ while cap.isOpened():
     # Process the frame with MediaPipe Hands
     results_hands = hands.process(rgb_frame)
 
+    # Draw a medium-sized black rectangle outline on the screen
+    rect_size = 50
+    rect_thickness = 2  # Thickness of the rectangle outline
+    rect_color = (0, 0, 0)
+    cv2.rectangle(frame, (10, 10), (10 + rect_size, 10 + rect_size), rect_color, rect_thickness)
+
     # Overlay the green circle on landmark 9
     if results_hands.multi_hand_landmarks:
         for landmarks in results_hands.multi_hand_landmarks:
@@ -36,11 +42,11 @@ while cap.isOpened():
             # Draw the green circle on landmark 9
             cv2.circle(frame, (x, y), 5, (0, 255, 0), -1)
 
-    # Draw a medium-sized black rectangle outline on the screen
-    rect_size = 50
-    rect_thickness = 2  # Thickness of the rectangle outline
-    rect_color = (0, 0, 0)
-    cv2.rectangle(frame, (10, 10), (10 + rect_size, 10 + rect_size), rect_color, rect_thickness)
+            
+
+            # Check if landmark 9 is inside the black rectangle
+            if 10 < x < (10 + rect_size) and 10 < y < (10 + rect_size):
+                print("YOURE IN")
 
     # Display the inverted frame
     cv2.imshow("Landmark 9 with Rectangle (Inverted)", frame)
@@ -55,3 +61,4 @@ cv2.destroyAllWindows()
 
 # Release the MediaPipe hands model
 hands.close()
+
