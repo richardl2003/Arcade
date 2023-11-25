@@ -82,5 +82,11 @@
     height: 200px;
     margin-right: 10px;
 
-    /* height: 300px; */
+    transform-origin: bottom left;
+    transition: transform 0.2s ease-in-out, margin-right 0.2s ease-in-out;
+}
+
+#mainGame {
+    transform: scale(1.5,1.5);
+    margin-right: 110px;
 }

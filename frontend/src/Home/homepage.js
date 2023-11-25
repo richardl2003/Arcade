@@ -1,4 +1,4 @@
-import { React, useEffect, useRef, useCallback} from 'react';
+import { React, useEffect, useRef, useCallback, useState } from 'react';
 import './homepage.css';
 // import { useNavigate } from 'react-router-dom';
 import Settings from '../Assets/Home/Settings.svg';
@@ -45,6 +45,20 @@ function Homepage() {
 const GameCarousel = () => {
   const carouselRef = useRef(null);
   const gameCount = 4 // Max amount of games to scroll right to
+  const [mainGameIndex, setMainGameIndex] = useState(0);
+
+  const games = [
+    { name: "Temple Run", cover: TempleRunCover, backgroundCover: TempleRunBackground },
+    { name: "Mario", cover: MarioCover },
+    { name: "Flappy Bird", cover: FlappyBirdCover },
+    { name: "2048", cover: TwentyCover },
+    { name: "Pacman", cover: PacmanCover },
+    { name: "Temple Run", cover: TempleRunCover, backgroundCover: TempleRunBackground },
+    { name: "Mario", cover: MarioCover },
+    { name: "Flappy Bird", cover: FlappyBirdCover },
+    { name: "2048", cover: TwentyCover },
+    { name: "Pacman", cover: PacmanCover }
+  ];
 
   // Swipe left or right based on key pressed
   const handleKeyDown = useCallback((event) => {
@@ -56,15 +70,22 @@ const GameCarousel = () => {
     var marginLeft = computedStyle.getPropertyValue('margin-left');
     marginLeft = parseInt(marginLeft, 10);
 
-    // Add to margin based on key pressed
-    if (event.key === 'ArrowLeft' && marginLeft < 50) marginLeft += 210;
-    else if (event.key === 'ArrowRight' && marginLeft > -(gameCount*210 - 50)) marginLeft -= 210;
+    // Add to margin based on key pressed, and set the new main game hovered
+    if (event.key === 'ArrowLeft' && marginLeft < 50) {
+      marginLeft += 210;
+      setMainGameIndex((prevIndex) => prevIndex - 1);
+    }
+    else if (event.key === 'ArrowRight' && marginLeft > -(gameCount*210 - 50)) {
+      marginLeft -= 210;
+      setMainGameIndex((prevIndex) => prevIndex + 1);
+    }
     carouselRef.current.style.marginLeft = `${marginLeft}px`;
 
     // wait 0.4 seconds until user is allowed to scroll again
     setTimeout(() => {
       window.addEventListener('keydown', handleKeyDown);
     }, 200);
+
   }, []);
 
   useEffect(() => {
@@ -77,23 +98,20 @@ const GameCarousel = () => {
 
   return (
     <div className='carousel' ref={carouselRef}>
-      <Game name="Temple Run" cover={TempleRunCover} backgroundCover={TempleRunBackground}/>
-      <Game name="Mario" cover={MarioCover}/>
-      <Game name="Flappy Bird" cover={FlappyBirdCover}/>
-      <Game name="2048" cover={TwentyCover}/>
-      <Game name="Pacman" cover={PacmanCover}/>
-      <Game name="Temple Run" cover={TempleRunCover} backgroundCover={TempleRunBackground}/>
-      <Game name="Mario" cover={MarioCover}/>
-      <Game name="Flappy Bird" cover={FlappyBirdCover}/>
-      <Game name="2048" cover={TwentyCover}/>
-      <Game name="Pacman" cover={PacmanCover}/>
+      {games.map((game, index) => (
+        <Game
+          name={game.name}
+          cover={game.cover}
+          isMain={index === mainGameIndex}
+        />
+      ))}
     </div>
   )
 }
 
-const Game = ({name, cover, backgroundCover}) => {
+const Game = ({name, cover, backgroundCover, isMain}) => {
   return (
-    <img className='gameCover' src={cover} alt={`${name}`}/>
+    <img className='gameCover' id={isMain ? 'mainGame' : ''} src={cover} alt={`${name}`}/>
   );
 }
 
