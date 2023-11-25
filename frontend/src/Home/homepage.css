@@ -18,10 +18,15 @@
 
 .navbar {
     display: flex;
-
-    margin: 20px
+    margin: 20px;
+    align-items: center;
 }
 
 .settingsIcon {
     height: 40px;
+    margin-right: 20px;
+}
+
+.time {
+    font-size: 30px;
 }

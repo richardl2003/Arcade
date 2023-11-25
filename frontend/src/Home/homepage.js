@@ -1,17 +1,17 @@
 import './homepage.css';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import Settings from '../Assets/Home/Settings.svg';
 import TempleRunBackground from '../Assets/Game/TempleRun/TempleRunBackground.png'
 
 function Homepage() {
 
-  let navigate = useNavigate(); 
+  // let navigate = useNavigate(); 
 
   return (
     <div className='homepage'>
-      <img className='homeBackground' src={TempleRunBackground} />
+      <img className='homeBackground' src={TempleRunBackground} alt='homeBackground' />
       <div className='navbar'>
-        <img className='settingsIcon' src={Settings}/>
+        <img className='settingsIcon' src={Settings} alt='settingsIcon'/>
         <div className='time'>
           1:30 PM
         </div>
@@ -23,11 +23,11 @@ function Homepage() {
   );
 }
 
-{/* <button type='button' onClick={() => navigate('/game/1')}>
+/* <button type='button' onClick={() => navigate('/game/1')}>
   Temple Run
 </button>
 <button type='button' onClick={() => navigate('/game/2')}>
   Mario
-</button> */}
+</button> */
 
 export default Homepage;

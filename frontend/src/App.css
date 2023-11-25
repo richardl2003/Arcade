@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
 .App {
   text-align: center;
-
   overflow-y: hidden;
 
+  font-family: VT323;
   color: white;
 }
