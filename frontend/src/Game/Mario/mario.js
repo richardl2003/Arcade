@@ -1,6 +1,20 @@
 import './mario.css';
+import { useEffect, useState } from 'react';
+import Webcam from "react-webcam";
+import axios from 'axios';
 
 function Mario() {
+  const [videoSrc, setVideoSrc] = useState('');
+  useEffect(() => {
+
+    const fetchData = async () => {
+      const response = await axios.get('http://localhost:5050/');
+      setVideoSrc(URL.createObjectURL(new Blob([response.data])));
+    }; 
+    
+    fetchData();
+  }, [])
+
 
   return (
     <div className="App">
@@ -10,7 +24,8 @@ function Mario() {
         </div>
         <div className="App-video">
           <h3>Video Stream</h3>
-          <img className="App-video-feed" src="http://localhost:5050/video_feed" alt="video stream" />
+          <Webcam src={videoSrc} />
+          {/* <img className="App-video-feed" src="http://localhost:5050/video_feed" alt="video stream" /> */}
         </div>        
       </div>
     </div>
