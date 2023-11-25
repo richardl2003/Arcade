@@ -3,6 +3,7 @@
 .App {
   text-align: center;
   overflow-y: hidden;
+  overflow-x: hidden;
 
   font-family: VT323;
   color: white;

@@ -1,11 +1,17 @@
+import { React, useEffect, useRef} from 'react';
 import './homepage.css';
 // import { useNavigate } from 'react-router-dom';
-import TempleRunBackground from '../Assets/Game/TempleRun/TempleRunBackground.png'
 import Settings from '../Assets/Home/Settings.svg';
 import Title from '../Assets/Home/Title.png';
 import Exercise from '../Assets/Home/Exercise.svg';
 import Clap from '../Assets/Home/Clap.svg';
 import Profile from '../Assets/Home/Profile.png';
+import TempleRunBackground from '../Assets/Game/TempleRun/TempleRunBackground.png'
+import TempleRunCover from '../Assets/Game/TempleRun/TempleRunCover.png';
+import MarioCover from '../Assets/Game/Mario/MarioCover.png';
+import FlappyBirdCover from '../Assets/Game/FlappyBird/FlappyBirdCover.png';
+import TwentyCover from '../Assets/Game/2048/2048Cover.png';
+import PacmanCover from '../Assets/Game/Pacman/PacmanCover.png';
 
 function Homepage() {
 
@@ -28,10 +34,58 @@ function Homepage() {
           <img className='profile' src={Profile} alt='Profile' />
         </div>
       </div>
-      <div className='carousel'>
-        Hello
+      <div className='carouselContainer'>
+        <GameCarousel/>
+        <div className='divider'/>
       </div>
     </div>
+  );
+}
+
+const GameCarousel = () => {
+  const carouselRef = useRef(null);
+
+  // Swipe left or right based on key pressed
+  const handleKeyDown = (event) => {
+    // Retrieve current margin
+    const computedStyle = window.getComputedStyle(carouselRef.current);
+    var marginLeft = computedStyle.getPropertyValue('margin-left');
+    marginLeft = parseInt(marginLeft, 10);
+
+    // Add to margin based on key pressed
+    if (event.key === 'ArrowLeft') marginLeft += 210;
+    else if (event.key === 'ArrowRight') marginLeft -= 210;
+
+    carouselRef.current.style.marginLeft = `${marginLeft}px`;
+  };
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []); // Empty dependency array means this effect will run once after the initial render
+
+  return (
+    <div className='carousel' ref={carouselRef}>
+      <Game name="Temple Run" cover={TempleRunCover} backgroundCover={TempleRunBackground}/>
+      <Game name="Mario" cover={MarioCover}/>
+      <Game name="Flappy Bird" cover={FlappyBirdCover}/>
+      <Game name="2048" cover={TwentyCover}/>
+      <Game name="Pacman" cover={PacmanCover}/>
+      <Game name="Temple Run" cover={TempleRunCover} backgroundCover={TempleRunBackground}/>
+      <Game name="Mario" cover={MarioCover}/>
+      <Game name="Flappy Bird" cover={FlappyBirdCover}/>
+      <Game name="2048" cover={TwentyCover}/>
+      <Game name="Pacman" cover={PacmanCover}/>
+    </div>
+  )
+}
+
+const Game = ({name, cover, backgroundCover}) => {
+  return (
+    <img className='gameCover' src={cover} alt={`${name}`}/>
   );
 }
 
