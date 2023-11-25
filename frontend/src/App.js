@@ -1,7 +1,7 @@
 import './App.css';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Homepage from './Home/homepage';
-import TempleRun from './Game/TempleRun/templeRun';
+import { routes }  from './Home/constants';
 
 function App() {
 
@@ -10,7 +10,11 @@ function App() {
       <Router basename="/">
           <Routes>
             <Route path='/' element={<Homepage/>}/>
-            <Route path='/templeRun' element={<TempleRun/>}/>
+            {
+              routes.map((route) => (
+                <Route key={route.id} path={route.path} element={route.element}/>
+              ))
+            }
           </Routes>
       </Router>
     </div>
