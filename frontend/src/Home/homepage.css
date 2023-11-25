@@ -90,3 +90,10 @@
     transform: scale(1.5,1.5);
     margin-right: 110px;
 }
+
+.mainGameTitle {
+    font-size: 60px;
+    position: absolute;
+    left: 360px;
+    bottom: 260px;
+}

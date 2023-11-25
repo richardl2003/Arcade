@@ -1,6 +1,6 @@
 import { React, useEffect, useRef, useCallback, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './homepage.css';
-// import { useNavigate } from 'react-router-dom';
 import Settings from '../Assets/Home/Settings.svg';
 import Title from '../Assets/Home/Title.png';
 import Exercise from '../Assets/Home/Exercise.svg';
@@ -13,10 +13,7 @@ import FlappyBirdCover from '../Assets/Game/FlappyBird/FlappyBirdCover.png';
 import TwentyCover from '../Assets/Game/2048/2048Cover.png';
 import PacmanCover from '../Assets/Game/Pacman/PacmanCover.png';
 
-function Homepage() {
-
-  // let navigate = useNavigate(); 
-
+function Homepage() { 
   return (
     <div className='homepage'>
       <img className='homeBackground' src={TempleRunBackground} alt='homeBackground' />
@@ -43,25 +40,32 @@ function Homepage() {
 }
 
 const GameCarousel = () => {
+  let navigate = useNavigate();
   const carouselRef = useRef(null);
-  const gameCount = 4 // Max amount of games to scroll right to
+  const gameCount = 5 // Max amount of games to scroll right to
   const [mainGameIndex, setMainGameIndex] = useState(0);
-
+  var enterMainGameIndex = 0;
   const games = [
-    { name: "Temple Run", cover: TempleRunCover, backgroundCover: TempleRunBackground },
-    { name: "Mario", cover: MarioCover },
-    { name: "Flappy Bird", cover: FlappyBirdCover },
-    { name: "2048", cover: TwentyCover },
-    { name: "Pacman", cover: PacmanCover },
-    { name: "Temple Run", cover: TempleRunCover, backgroundCover: TempleRunBackground },
-    { name: "Mario", cover: MarioCover },
-    { name: "Flappy Bird", cover: FlappyBirdCover },
-    { name: "2048", cover: TwentyCover },
-    { name: "Pacman", cover: PacmanCover }
+    { name: "Temple Run", cover: TempleRunCover, backgroundCover: TempleRunBackground, route: "/templeRun"},
+    { name: "Mario", cover: MarioCover, route: "/mario"},
+    { name: "Flappy Bird", cover: FlappyBirdCover, route: "/flappyBird" },
+    { name: "2048", cover: TwentyCover, route: "/2048"},
+    { name: "Pacman", cover: PacmanCover, route: "/Pacman"},
+    { name: "Temple Run", cover: TempleRunCover, backgroundCover: TempleRunBackground, route: "/templeRun"},
+    { name: "Mario", cover: MarioCover, route: "/mario"},
+    { name: "Flappy Bird", cover: FlappyBirdCover, route: "/flappyBird" },
+    { name: "2048", cover: TwentyCover, route: "/2048"},
+    { name: "Pacman", cover: PacmanCover, route: "/Pacman"}
   ];
 
-  // Swipe left or right based on key pressed
+  // Execute event based on key pressed
   const handleKeyDown = useCallback((event) => {
+    // If enter key pressed, enter that game
+    if (event.key === 'Enter') {
+      navigate(games[enterMainGameIndex].route)
+      return;
+    }
+
     // remove event listener so user cannot scroll during a current scroll
     window.removeEventListener('keydown', handleKeyDown);
 
@@ -70,13 +74,17 @@ const GameCarousel = () => {
     var marginLeft = computedStyle.getPropertyValue('margin-left');
     marginLeft = parseInt(marginLeft, 10);
 
-    // Add to margin based on key pressed, and set the new main game hovered
+    // Add to margin based on left/right key pressed, and set the new main game hovered
     if (event.key === 'ArrowLeft' && marginLeft < 50) {
       marginLeft += 210;
+
+      enterMainGameIndex -= 1;
       setMainGameIndex((prevIndex) => prevIndex - 1);
     }
     else if (event.key === 'ArrowRight' && marginLeft > -(gameCount*210 - 50)) {
       marginLeft -= 210;
+
+      enterMainGameIndex += 1;
       setMainGameIndex((prevIndex) => prevIndex + 1);
     }
     carouselRef.current.style.marginLeft = `${marginLeft}px`;
@@ -100,11 +108,15 @@ const GameCarousel = () => {
     <div className='carousel' ref={carouselRef}>
       {games.map((game, index) => (
         <Game
+          key={index}
           name={game.name}
           cover={game.cover}
           isMain={index === mainGameIndex}
         />
       ))}
+      <div className='mainGameTitle'>
+        {games[mainGameIndex].name}
+      </div>
     </div>
   )
 }
@@ -114,12 +126,5 @@ const Game = ({name, cover, backgroundCover, isMain}) => {
     <img className='gameCover' id={isMain ? 'mainGame' : ''} src={cover} alt={`${name}`}/>
   );
 }
-
-/* <button type='button' onClick={() => navigate('/game/1')}>
-  Temple Run
-</button>
-<button type='button' onClick={() => navigate('/game/2')}>
-  Mario
-</button> */
 
 export default Homepage;
