@@ -20,13 +20,40 @@
     display: flex;
     margin: 20px;
     align-items: center;
+    justify-content: space-between;
+}
+
+.leftNavbar {
+    display: flex;
+    align-items: center;
 }
 
 .settingsIcon {
     height: 40px;
     margin-right: 20px;
+    cursor: pointer;
 }
 
 .time {
     font-size: 30px;
+}
+
+.title {
+    height: 50px;
+    margin-left: 65px;
+}
+
+.profile {
+    height: 45px;
+
+    padding-left: 20px;
+    border-left: solid;
+    border-left-width: 1px;
+    border-color: gray;
+}
+
+.clap, .exercise {
+    height: 45px;
+    margin-right: 20px;
+    cursor: pointer;
 }
