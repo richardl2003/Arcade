@@ -16,6 +16,9 @@ while cap.isOpened():
         print("Failed to capture frame.")
         break
 
+    # Flip the frame horizontally
+    frame = cv2.flip(frame, 1)
+
     # Convert the BGR image to RGB
     rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
@@ -33,8 +36,14 @@ while cap.isOpened():
             # Draw the green circle on landmark 9
             cv2.circle(frame, (x, y), 5, (0, 255, 0), -1)
 
-    # Display the frame
-    cv2.imshow("Landmark 9", frame)
+    # Draw a medium-sized black rectangle outline on the screen
+    rect_size = 50
+    rect_thickness = 2  # Thickness of the rectangle outline
+    rect_color = (0, 0, 0)
+    cv2.rectangle(frame, (10, 10), (10 + rect_size, 10 + rect_size), rect_color, rect_thickness)
+
+    # Display the inverted frame
+    cv2.imshow("Landmark 9 with Rectangle (Inverted)", frame)
 
     # Break the loop when 'q' is pressed
     if cv2.waitKey(1) & 0xFF == ord('q'):
