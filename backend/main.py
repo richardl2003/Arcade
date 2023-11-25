@@ -64,6 +64,7 @@ def index():
 def gen():
     global last_frames, last_keys, frame_midpoint
 
+    """
     parser = argparse.ArgumentParser()
     parser.add_argument('--map', '-m', help='File to import for mapped keys')
     parser.add_argument('--input', '-i', help='Input video device or file (number or path), defaults to 0', default='0')
@@ -80,6 +81,13 @@ def gen():
     RECORDING = args.record is not None
     DISPLAY_ONLY = args.display is not None
     SPLIT = int(args.split)
+    """
+    INPUT = 0
+    FLIP = True
+    DRAW_LANDMARKS = True
+    RECORDING = False
+    DISPLAY_ONLY = False
+    SPLIT = 1
 
     last_frames = SPLIT * [last_frames.copy()]
     last_keys = SPLIT * [[]]
