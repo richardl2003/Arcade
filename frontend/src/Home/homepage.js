@@ -1,4 +1,4 @@
-import { React, useEffect, useRef} from 'react';
+import { React, useEffect, useRef, useCallback} from 'react';
 import './homepage.css';
 // import { useNavigate } from 'react-router-dom';
 import Settings from '../Assets/Home/Settings.svg';
@@ -44,20 +44,28 @@ function Homepage() {
 
 const GameCarousel = () => {
   const carouselRef = useRef(null);
+  const gameCount = 4 // Max amount of games to scroll right to
 
   // Swipe left or right based on key pressed
-  const handleKeyDown = (event) => {
+  const handleKeyDown = useCallback((event) => {
+    // remove event listener so user cannot scroll during a current scroll
+    window.removeEventListener('keydown', handleKeyDown);
+
     // Retrieve current margin
     const computedStyle = window.getComputedStyle(carouselRef.current);
     var marginLeft = computedStyle.getPropertyValue('margin-left');
     marginLeft = parseInt(marginLeft, 10);
 
     // Add to margin based on key pressed
-    if (event.key === 'ArrowLeft') marginLeft += 210;
-    else if (event.key === 'ArrowRight') marginLeft -= 210;
-
+    if (event.key === 'ArrowLeft' && marginLeft < 50) marginLeft += 210;
+    else if (event.key === 'ArrowRight' && marginLeft > -(gameCount*210 - 50)) marginLeft -= 210;
     carouselRef.current.style.marginLeft = `${marginLeft}px`;
-  };
+
+    // wait 0.4 seconds until user is allowed to scroll again
+    setTimeout(() => {
+      window.addEventListener('keydown', handleKeyDown);
+    }, 200);
+  }, []);
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
@@ -65,7 +73,7 @@ const GameCarousel = () => {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, []); // Empty dependency array means this effect will run once after the initial render
+  }, [handleKeyDown]);
 
   return (
     <div className='carousel' ref={carouselRef}>

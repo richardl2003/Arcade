@@ -74,6 +74,8 @@
     display: flex;
     margin: 0 50px;
     padding-bottom: 15px;
+
+    transition: margin-left 0.2s ease;
 }
 
 .gameCover {
