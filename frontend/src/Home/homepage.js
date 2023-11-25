@@ -6,12 +6,8 @@ import Title from '../Assets/Home/Title.png';
 import Exercise from '../Assets/Home/Exercise.svg';
 import Clap from '../Assets/Home/Clap.svg';
 import Profile from '../Assets/Home/Profile.png';
-import TempleRunBackground from '../Assets/Game/TempleRun/TempleRunBackground.png'
-import TempleRunCover from '../Assets/Game/TempleRun/TempleRunCover.png';
-import MarioCover from '../Assets/Game/Mario/MarioCover.png';
-import FlappyBirdCover from '../Assets/Game/FlappyBird/FlappyBirdCover.png';
-import TwentyCover from '../Assets/Game/2048/2048Cover.png';
-import PacmanCover from '../Assets/Game/Pacman/PacmanCover.png';
+import TempleRunBackground from '../Assets/Game/TempleRun/TempleRunBackground.png';
+import { games } from './games.js';
 
 function Homepage() { 
   return (
@@ -43,26 +39,16 @@ const GameCarousel = () => {
   let navigate = useNavigate();
   const carouselRef = useRef(null);
   const gameCount = 5 // Max amount of games to scroll right to
+
+  // mainGameIndex keeps track for div elements, curMainGameIndex keeps track for callback to route
   const [mainGameIndex, setMainGameIndex] = useState(0);
-  var enterMainGameIndex = 0;
-  const games = [
-    { name: "Temple Run", cover: TempleRunCover, backgroundCover: TempleRunBackground, route: "/templeRun"},
-    { name: "Mario", cover: MarioCover, route: "/mario"},
-    { name: "Flappy Bird", cover: FlappyBirdCover, route: "/flappyBird" },
-    { name: "2048", cover: TwentyCover, route: "/2048"},
-    { name: "Pacman", cover: PacmanCover, route: "/Pacman"},
-    { name: "Temple Run", cover: TempleRunCover, backgroundCover: TempleRunBackground, route: "/templeRun"},
-    { name: "Mario", cover: MarioCover, route: "/mario"},
-    { name: "Flappy Bird", cover: FlappyBirdCover, route: "/flappyBird" },
-    { name: "2048", cover: TwentyCover, route: "/2048"},
-    { name: "Pacman", cover: PacmanCover, route: "/Pacman"}
-  ];
+  var curMainGameIndex = useRef(0);
 
   // Execute event based on key pressed
   const handleKeyDown = useCallback((event) => {
     // If enter key pressed, enter that game
     if (event.key === 'Enter') {
-      navigate(games[enterMainGameIndex].route)
+      navigate(games[curMainGameIndex.current].route)
       return;
     }
 
@@ -78,13 +64,13 @@ const GameCarousel = () => {
     if (event.key === 'ArrowLeft' && marginLeft < 50) {
       marginLeft += 210;
 
-      enterMainGameIndex -= 1;
+      curMainGameIndex.current -= 1;
       setMainGameIndex((prevIndex) => prevIndex - 1);
     }
     else if (event.key === 'ArrowRight' && marginLeft > -(gameCount*210 - 50)) {
       marginLeft -= 210;
 
-      enterMainGameIndex += 1;
+      curMainGameIndex.current += 1;
       setMainGameIndex((prevIndex) => prevIndex + 1);
     }
     carouselRef.current.style.marginLeft = `${marginLeft}px`;
@@ -94,7 +80,7 @@ const GameCarousel = () => {
       window.addEventListener('keydown', handleKeyDown);
     }, 200);
 
-  }, []);
+  }, [navigate]);
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
