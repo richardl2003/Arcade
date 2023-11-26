@@ -1,7 +1,7 @@
 import argparse
 from contextlib import ExitStack
 import csv
-
+from screeninfo import get_monitors
 import keyboard # local fork
 
 import mediapipe as mp
@@ -207,7 +207,7 @@ def output(keys, previous_keys, repeat, image, display_only):
           keyboard.press(keystring)
 
 def render_and_maybe_exit(image, recording):
-  cv2.imshow('Webcam', image)
+  cv2.imshow('Webcam Feed', image)
   if recording:
     recording.write(image)
   return cv2.waitKey(5) & 0xFF == 27
@@ -312,12 +312,41 @@ def process_poses(image, pose_models, draw_landmarks, flip, display_only):
 
   return image
 
+# def windowSpecs():
+#   # Get the width and height of the camera feed
+# width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+# height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+
+# # Set a specific aspect ratio (e.g., 16:9)
+# target_aspect_ratio = 16 / 10
+# new_width = int(height * target_aspect_ratio)
+
+# # Get the screen resolution
+# screen_width, screen_height = 0, 0  # Default values if unable to get the resolution
+# for monitor in get_monitors():
+#     screen_width = max(screen_width, monitor.width)
+#     screen_height = max(screen_height, monitor.height)
+
+# # Position the window right up against the upper right corner
+# offset_x = 10  # Adjust this value to control the gap from the right edge
+# offset_y= 60
+# center_x = screen_width - new_width - offset_x
+# center_y = 0 - offset_y # Place it at the top
+
+# # Create a window with the specified aspect ratio, move it, and set as topmost
+# cv2.namedWindow("Webcam Feed", cv2.WINDOW_NORMAL)
+# cv2.resizeWindow("Webcam Feed", new_width, height)
+# cv2.moveWindow("Webcam Feed", center_x, center_y)
+# cv2.setWindowProperty("Webcam Feed", cv2.WND_PROP_TOPMOST, 1)  # Set as topmost
+
 
 def main():
   global last_frames, last_keys, frame_midpoint
 
   # parser = argparse.ArgumentParser()
-  # parser.add_argument('--map', '-m', help='File to import for mapped keys')
+  # parser.add_argument('--map', '-m', help='File to import fo
+  # r mapped keys')
+
   # parser.add_argument('--input', '-i', help='Input video device or file (number or path), defaults to 0', default='0')
   # parser.add_argument('--flip', '-f', help='Set to any value to flip resulting output (selfie view)')
   # parser.add_argument('--landmarks', '-l', help='Set to any value to draw body landmarks')
@@ -333,6 +362,9 @@ def main():
   # DISPLAY_ONLY = args.display is not None
   # SPLIT = 1
 
+
+  
+
   INPUT = 0
   FLIP = True
   DRAW_LANDMARKS = True
@@ -344,9 +376,30 @@ def main():
   last_keys = SPLIT * [[]]
 
   cap = cv2.VideoCapture(INPUT)
+  width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+  height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
-  frame_size = (int(cap.get(3)), int(cap.get(4)))
-  frame_midpoint = (int(frame_size[0]/2), int(frame_size[1]/2))
+  # Set a specific aspect ratio (e.g., 16:9)
+  target_aspect_ratio = 4/3
+  new_width = int(height * target_aspect_ratio)
+
+  screen_width, screen_height = 0, 0  # Default values if unable to get the resolution
+  for monitor in get_monitors():
+      screen_width = max(screen_width, monitor.width)
+      screen_height = max(screen_height, monitor.height)
+
+  # Position the window in the top right corner
+  offset_x = 10  # Adjust this value to control the gap from the right edge
+  offset_y = -10  # Adjust this value to control the gap from the top edge
+  center_x = screen_width - new_width - offset_x
+  center_y = offset_y
+
+  # Create a window with the specified aspect ratio, move it, and set as topmost
+  window_name = "Webcam Feed"  # Consistent window name
+  cv2.namedWindow(window_name, cv2.WINDOW_NORMAL)
+  cv2.resizeWindow(window_name, new_width, height)
+  cv2.moveWindow(window_name, center_x, center_y)
+  cv2.setWindowProperty(window_name, cv2.WND_PROP_TOPMOST, 1)  # Set as topmost
 
   recording = cv2.VideoWriter(RECORDING_FILENAME,
     cv2.VideoWriter_fourcc(*'MJPG'), FPS, frame_size) if RECORDING else None
