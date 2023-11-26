@@ -9,10 +9,17 @@ import Profile from '../Assets/Home/Profile.png';
 import { games } from './games.js';
 
 function Homepage() { 
-  const date = new Date();
-  const time = date.getHours() 
+  var [date,setDate] = useState(new Date());
+  var time = date.getHours() 
       + ':' + date.getMinutes() 
       + ' PM'
+
+  useEffect(() => {
+      var timer = setInterval(()=>setDate(new Date()), 1000 )
+      return function cleanup() {
+          clearInterval(timer)
+      }
+  });
 
   return (
     <div className='homepage'>
