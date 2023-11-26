@@ -16,7 +16,7 @@ def index():
     stop_current_process()
     try:
         global current_process
-        current_process = subprocess.Popen(['python', '-m', 'navigation.csv', '-f', '1', '-l', '1'])
+        current_process = subprocess.Popen(['python', 'play.py', '-m', 'navigation.csv', '-f', '1', '-l', '1'])
     except subprocess.CalledProcessError as e:
         print(f"An error occurred: {e}")
     return render_template('App.js')
@@ -26,7 +26,7 @@ def templerun():
     stop_current_process()
     try:
         global current_process
-        current_process = subprocess.Popen(['python', '-m', 'templerun.csv', '-f', '1', '-l', '1'])
+        current_process = subprocess.Popen(['python', 'play.py', '-m', 'templerun.csv', '-f', '1', '-l', '1'])
     except subprocess.CalledProcessError as e:
         print(f"An error occurred: {e}")
     return render_template('templerun.js')
@@ -36,7 +36,7 @@ def mario():
     stop_current_process()
     try:
         global current_process
-        current_process = subprocess.Popen(['python', '-m', 'supermario.csv', '-f', '1', '-l', '1'])
+        current_process = subprocess.Popen(['python', 'play.py', '-m', 'supermario.csv', '-f', '1', '-l', '1'])
     except subprocess.CalledProcessError as e:
         print(f"An error occurred: {e}")
     return render_template('mario.js')
@@ -46,7 +46,7 @@ def flappybird():
     stop_current_process()
     try:
         global current_process
-        current_process = subprocess.Popen(['python', '-m', 'flappybird.csv', '-f', '1', '-l', '1'])
+        current_process = subprocess.Popen(['python', 'play.py', '-m', 'flappybird.csv', '-f', '1', '-l', '1'])
     except subprocess.CalledProcessError as e:
         print(f"An error occurred: {e}")
     return render_template('flappybird.js')
@@ -56,7 +56,7 @@ def game2048():
     stop_current_process()
     try:
         global current_process
-        current_process = subprocess.Popen(['python', '-m', '2048.csv', '-f', '1', '-l', '1'])
+        current_process = subprocess.Popen(['python', 'play.py', '-m', '2048.csv', '-f', '1', '-l', '1'])
     except subprocess.CalledProcessError as e:
         print(f"An error occurred: {e}")
     return render_template('2048.js')
@@ -66,7 +66,7 @@ def pacman():
     stop_current_process()
     try:
         global current_process
-        current_process = subprocess.Popen(['python', '-m', 'pacman.csv', '-f', '1', '-l', '1'])
+        current_process = subprocess.Popen(['python', 'play.py', '-m', 'pacman.csv', '-f', '1', '-l', '1'])
     except subprocess.CalledProcessError as e:
         print(f"An error occurred: {e}")
     return render_template('pacman.js')
