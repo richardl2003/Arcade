@@ -10,7 +10,7 @@ function TempleRun() {
         </div>
         <div className="App-video">
           <h3>Video Stream</h3>
-          <img className="App-video-feed" src="http://localhost:5050/video_feed" alt="video stream" />
+          <img className="App-video-feed" src="http://localhost:5050/templerun" alt="video stream" />
         </div>        
       </div>
     </div>
