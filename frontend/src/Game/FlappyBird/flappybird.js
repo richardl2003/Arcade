@@ -16,7 +16,7 @@ function FlappyBird() {
               Flap
           </div>
           <div className="iconContainer">
-              <img className='icon' src={CoverMouth} alt='CoverMouth'/>
+              <img className='icon' src={CoverMouth} alt='Cover Mouth'/>
               Exit
           </div>
         </div>
