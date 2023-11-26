@@ -25,22 +25,26 @@
   flex-direction: column;
   flex:1;
 
-  margin: 350px 40px 0 40px;
+  margin: 330px 30px 0 30px;
 
   color: black;
 }
 
-.armRow {
+.row {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 50px;
 }
 
-.leftArmContainer {
+.iconContainer {
   display: flex;
   align-items: center;
+
+  font-size: 30px;
 }
 
-.leftArmIcon {
+.icon {
   height: 100px;
+  margin-right: 10px;
 }
   
