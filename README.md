@@ -1,3 +1,5 @@
+<img src="logo.png" title="Arcade logo" width="40%"/>
+
 ## Inspiration
 Video games evolved when the Xbox Kinect was released in 2010 but for some reason we reverted back to controller based games. We are here to bring back the amazingness of movement controlled games with a new twist- re innovating how mobile games are played!
 

@@ -17,7 +17,7 @@ function TempleRun() {
         <div className="row">
           <div className="iconContainer">
               <img className='icon' src={Left} alt='Left'/>
-              Move left
+              Move Left
           </div>
           <div className="iconContainer">
               <img className='icon' src={Right} alt='Right'/>
@@ -36,7 +36,7 @@ function TempleRun() {
         </div>
         <div className="row">
           <div className="iconContainer">
-              <img className='icon' src={CrossArms} alt='Cross arms'/>
+              <img className='icon' src={CrossArms} alt='Cross Arms'/>
               Jump
           </div>
           <div className="iconContainer">
