@@ -4,8 +4,8 @@ import './crossyroad.css';
 import Left from '../../Assets/Game/Controls/Left.png';
 import Right from '../../Assets/Game/Controls/Right.png';
 import Jump from '../../Assets/Game/Controls/Jump.png';
-import Squat from '../../Assets/Game/Controls/Squat.png';
-import CrossArms from '../../Assets/Game/Controls/CrossArms.png';
+import LeftLeg from '../../Assets/Game/Controls/LeftLeg.png';
+import RightLeg from '../../Assets/Game/Controls/RightLeg.png';
 
 function CrossyRoad() {
   let navigate = useNavigate();
