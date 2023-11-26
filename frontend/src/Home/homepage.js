@@ -9,13 +9,18 @@ import Profile from '../Assets/Home/Profile.png';
 import { games } from './games.js';
 
 function Homepage() { 
+  const date = new Date();
+  const time = date.getHours() 
+      + ':' + date.getMinutes() 
+      + ' PM'
+
   return (
     <div className='homepage'>
       <div className='navbar'>
         <div className='leftNavbar'>
           <img className='settingsIcon' src={Settings} alt='settingsIcon'/>
           <div className='time'>
-            1:30 PM
+            {time}
           </div>
         </div>
         <img className='title' src={Title} alt='Title' />
