@@ -15,12 +15,12 @@ import Pacman from "../Game/Pacman/pacman";
 import CrossyRoadCover from '../Assets/Game/CrossyRoad/CrossyRoadCover.png';
 import CrossyRoadBackground from '../Assets/Game/CrossyRoad/CrossyRoadBackground.jpeg';
 import CrossyRoad from "../Game/CrossyRoad/crossyroad";
-import TetrisCover from '../Assets/Game/Tetris/TetrisCover.jpeg';
+import TetrisCover from '../Assets/Game/Tetris/TetrisCover.png';
 import TetrisBackground from '../Assets/Game/Tetris/TetrisBackground.jpg';
 import Tetris from "../Game/Tetris/tetris";
 import FlappyBird from "../Game/FlappyBird/flappybird";
 import SpaceInvadersBackground from '../Assets/Game/SpaceInvaders/SpaceInvadersBackground.jpg';
-import SpaceInvadersCover from '../Assets/Game/SpaceInvaders/SpaceInvadersLogo.jpg';
+import SpaceInvadersCover from '../Assets/Game/SpaceInvaders/SpaceInvadersLogo.png';
 import SpaceInvaders from "../Game/SpaceInvaders/spaceinvaders";
 
 export const games = [
