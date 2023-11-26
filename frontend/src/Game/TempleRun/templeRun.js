@@ -3,6 +3,8 @@ import Left from '../../Assets/Game/Controls/Left.png';
 import Right from '../../Assets/Game/Controls/Right.png';
 import Jump from '../../Assets/Game/Controls/Jump.png';
 import Squat from '../../Assets/Game/Controls/Squat.png';
+import CoverMouth from '../../Assets/Game/Controls/CoverMouth.png';
+import CrossArms from '../../Assets/Game/Controls/CrossArms.png';
 
 function TempleRun() {
   return (
@@ -34,11 +36,11 @@ function TempleRun() {
         </div>
         <div className="row">
           <div className="iconContainer">
-              <img className='icon' src={Jump} alt='Cross arms'/>
+              <img className='icon' src={CrossArms} alt='Cross arms'/>
               Jump
           </div>
           <div className="iconContainer">
-              <img className='icon' src={Squat} alt='Squat'/>
+              <img className='icon' src={CoverMouth} alt='Cover Mouth'/>
               Exit
           </div>
         </div>
