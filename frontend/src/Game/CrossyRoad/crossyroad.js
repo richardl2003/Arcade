@@ -37,14 +37,14 @@ function CrossyRoad() {
               Play Again
           </div>
           <div className="iconContainer">
-              <img className='icon' src={Squat} alt='Squat'/>
-              Slide
+              <img className='icon' src={RightLeg} alt='Squat'/>
+              Up
           </div>
         </div>
         <div className="row">
           <div className="iconContainer">
-              <img className='icon' src={CrossArms} alt='Cross arms'/>
-              Jump
+              <img className='icon' src={LeftLeg} alt='Cross arms'/>
+              Down
           </div>
           <div className="iconContainer">
             <img className="exitButton" src={Exit} onClick={redirectHome} alt="Exit Button"/>

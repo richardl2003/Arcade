@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import Exit from '../../Assets/Game/Controls/Exit.png';
 import './mario.css';
-import Left from '../../Assets/Game/Controls/Left.png';
-import Right from '../../Assets/Game/Controls/Right.png';
+import LeftLeg from '../../Assets/Game/Controls/LeftLeg.png';
+import RightLeg from '../../Assets/Game/Controls/RightLeg.png';
 import Jump from '../../Assets/Game/Controls/Jump.png';
 import Squat from '../../Assets/Game/Controls/Squat.png';
 
@@ -23,11 +23,11 @@ function Mario() {
       <div className="instructionsContainer">
         <div className="row">
           <div className="iconContainer">
-              <img className='icon' src={Left} alt='Left'/>
+              <img className='icon' src={LeftLeg} alt='Left'/>
               Move left
           </div>
           <div className="iconContainer">
-              <img className='icon' src={Right} alt='Right'/>
+              <img className='icon' src={RightLeg} alt='Right'/>
               Move Right
           </div>
         </div>
