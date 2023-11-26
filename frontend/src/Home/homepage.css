@@ -18,8 +18,8 @@
     filter: brightness(80%);
 }
 
-#animation {
-    animation: fadeIn 0.2s ease-in-out;
+#backgroundTransition {
+    animation: fadeIn 0.2s;
 }
 
 @keyframes fadeIn {
@@ -32,7 +32,7 @@
     100% {
         opacity: 1;
     }
-  }
+}
 
 .navbar {
     display: flex;
@@ -115,3 +115,19 @@
     left: 360px;
     bottom: 260px;
 }
+
+#nameTransition {
+    animation: slideIn 0.2s ease-in-out;
+}
+
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
