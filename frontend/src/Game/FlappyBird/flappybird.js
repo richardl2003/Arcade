@@ -13,7 +13,7 @@ function FlappyBird() {
   return (
     <div className="flappyBird">
       <div className='gameContainer'>
-        <iframe title="game" className="game" src="https://flappybird.io" frameborder="0" />
+        <iframe title="game" className="game" src="https://flappybird.io" scrolling="no" frameborder="0" />
         <embed className='endpoint' src="http://localhost:5050/flappybird"/>
       </div>
       <div className="instructionsContainer">

@@ -17,7 +17,7 @@ function Pacman() {
   return (
     <div className="templeRun">
       <div className='gameContainer'>
-        <iframe title="game" className="game" src="https://cdn.htmlgames.com/ClassicPac/" frameborder="0" />
+        <iframe title="game" className="game" src="https://cdn.htmlgames.com/ClassicPac/" scrolling="no" frameborder="0" />
         <embed className='endpoint' src="http://localhost:5050/pacman"/>
       </div>
       <div className="instructionsContainer">

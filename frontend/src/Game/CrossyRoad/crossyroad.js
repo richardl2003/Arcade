@@ -17,7 +17,7 @@ function CrossyRoad() {
   return (
     <div className="crossyRoad">
       <div className='gameContainer'>
-        <iframe title="game" className="game" src="https://ducklife.online/crossy-road" frameborder="0" />
+        <iframe title="game" className="game" src="https://ducklife.online/crossy-road" scrolling="no" frameborder="0" />
         <embed className='endpoint' src="http://localhost:5050/crossyroad"/>
       </div>
       <div className="instructionsContainer">
