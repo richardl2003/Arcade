@@ -312,65 +312,28 @@ def process_poses(image, pose_models, draw_landmarks, flip, display_only):
 
   return image
 
-# def windowSpecs():
-#   # Get the width and height of the camera feed
-# width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
-# height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
-# # Set a specific aspect ratio (e.g., 16:9)
-# target_aspect_ratio = 16 / 10
-# new_width = int(height * target_aspect_ratio)
-
-# # Get the screen resolution
-# screen_width, screen_height = 0, 0  # Default values if unable to get the resolution
-# for monitor in get_monitors():
-#     screen_width = max(screen_width, monitor.width)
-#     screen_height = max(screen_height, monitor.height)
-
-# # Position the window right up against the upper right corner
-# offset_x = 10  # Adjust this value to control the gap from the right edge
-# offset_y= 60
-# center_x = screen_width - new_width - offset_x
-# center_y = 0 - offset_y # Place it at the top
-
-# # Create a window with the specified aspect ratio, move it, and set as topmost
-# cv2.namedWindow("Webcam Feed", cv2.WINDOW_NORMAL)
-# cv2.resizeWindow("Webcam Feed", new_width, height)
-# cv2.moveWindow("Webcam Feed", center_x, center_y)
-# cv2.setWindowProperty("Webcam Feed", cv2.WND_PROP_TOPMOST, 1)  # Set as topmost
 
 
 def main():
   global last_frames, last_keys, frame_midpoint
 
-  # parser = argparse.ArgumentParser()
-  # parser.add_argument('--map', '-m', help='File to import fo
-  # r mapped keys')
+  parser = argparse.ArgumentParser()
+  parser.add_argument('--map', '-m', help='File to import for mapped keys')
+  parser.add_argument('--input', '-i', help='Input video device or file (number or path), defaults to 0', default='0')
+  parser.add_argument('--flip', '-f', help='Set to any value to flip resulting output (selfie view)')
+  parser.add_argument('--landmarks', '-l', help='Set to any value to draw body landmarks')
+  parser.add_argument('--record', '-r', help='Set to any value to save a timestamped AVI in current directory')
+  parser.add_argument('--display', '-d', help='Set to any value to only visually display output rather than type')
+  parser.add_argument('--split', '-s', help='Split the screen into a positive integer of separate regions, defaults to 1', default='1')
+  args = parser.parse_args()
 
-  # parser.add_argument('--input', '-i', help='Input video device or file (number or path), defaults to 0', default='0')
-  # parser.add_argument('--flip', '-f', help='Set to any value to flip resulting output (selfie view)')
-  # parser.add_argument('--landmarks', '-l', help='Set to any value to draw body landmarks')
-  # parser.add_argument('--record', '-r', help='Set to any value to save a timestamped AVI in current directory')
-  # parser.add_argument('--display', '-d', help='Set to any value to only visually display output rather than type')
-  # parser.add_argument('--split', '-s', help='Split the screen into a positive integer of separate regions, defaults to 1', default='1')
-  # args = parser.parse_args()
-
-  # INPUT = int(args.input) if args.input.isdigit() else args.input
-  # FLIP = args.flip is not None
-  # DRAW_LANDMARKS = args.landmarks is not None
-  # RECORDING = args.record is not None
-  # DISPLAY_ONLY = args.display is not None
-  # SPLIT = 1
-
-
-  
-
-  INPUT = 0
-  FLIP = True
-  DRAW_LANDMARKS = True
-  RECORDING = False
-  DISPLAY_ONLY = False
-  SPLIT = 1
+  INPUT = int(args.input) if args.input.isdigit() else args.input
+  FLIP = args.flip is not None
+  DRAW_LANDMARKS = args.landmarks is not None
+  RECORDING = args.record is not None
+  DISPLAY_ONLY = args.display is not None
+  SPLIT = int(args.split)
 
   last_frames = SPLIT * [last_frames.copy()]
   last_keys = SPLIT * [[]]
@@ -404,20 +367,17 @@ def main():
   recording = cv2.VideoWriter(RECORDING_FILENAME,
     cv2.VideoWriter_fourcc(*'MJPG'), FPS, frame_size) if RECORDING else None
 
-  #MAP_FILE = args.map
-  MAP_FILE = "templerun.csv"
+  MAP_FILE = args.map
   map_keys(MAP_FILE, SPLIT)
 
   with ExitStack() as stack:
     pose_models = SPLIT*[stack.enter_context(mp.solutions.pose.Pose())]
-    
 
     while cap.isOpened():
       success, image = cap.read()
       if not success: break
 
       image = process_poses(image, pose_models, DRAW_LANDMARKS, FLIP, DISPLAY_ONLY)
-      
 
       if render_and_maybe_exit(image, recording):
         break
