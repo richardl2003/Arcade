@@ -6,13 +6,11 @@ import Title from '../Assets/Home/Title.png';
 import Exercise from '../Assets/Home/Exercise.svg';
 import Clap from '../Assets/Home/Clap.svg';
 import Profile from '../Assets/Home/Profile.png';
-import TempleRunBackground from '../Assets/Game/TempleRun/TempleRunBackground.png';
 import { games } from './games.js';
 
 function Homepage() { 
   return (
     <div className='homepage'>
-      <img className='homeBackground' src={TempleRunBackground} alt='homeBackground' />
       <div className='navbar'>
         <div className='leftNavbar'>
           <img className='settingsIcon' src={Settings} alt='settingsIcon'/>
@@ -43,6 +41,7 @@ const GameCarousel = () => {
   // mainGameIndex keeps track for div elements, curMainGameIndex keeps track for callback to route
   const [mainGameIndex, setMainGameIndex] = useState(0);
   var curMainGameIndex = useRef(0);
+  const [transition, setTransition] = useState("");
 
   // Execute event based on key pressed
   const handleKeyDown = useCallback((event) => {
@@ -66,12 +65,24 @@ const GameCarousel = () => {
 
       curMainGameIndex.current -= 1;
       setMainGameIndex((prevIndex) => prevIndex - 1);
+
+      // Add background transition
+      setTransition("animation");
+      setTimeout(() => {
+        setTransition("");
+      }, 200);
     }
     else if (event.key === 'ArrowRight' && marginLeft > -(gameCount*210 - 50)) {
       marginLeft -= 210;
 
       curMainGameIndex.current += 1;
       setMainGameIndex((prevIndex) => prevIndex + 1);
+
+      // Add background transition
+      setTransition("animation");
+      setTimeout(() => {
+        setTransition("");
+      }, 200);
     }
     carouselRef.current.style.marginLeft = `${marginLeft}px`;
 
@@ -103,6 +114,7 @@ const GameCarousel = () => {
       <div className='mainGameTitle'>
         {games[mainGameIndex].name}
       </div>
+      <img className='homeBackground' id={transition} src={games[mainGameIndex].backgroundCover} alt='homeBackground' />
     </div>
   )
 }
