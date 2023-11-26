@@ -10,9 +10,16 @@ import { games } from './games.js';
 
 function Homepage() { 
   var [date,setDate] = useState(new Date());
-  var time = date.getHours() 
+  if (date.getMinutes() < 10) {
+    var time = date.getHours() 
+      + ':0' + date.getMinutes() 
+      + ' PM'
+  }
+  else {
+    var time = date.getHours() 
       + ':' + date.getMinutes() 
       + ' PM'
+  }
 
   useEffect(() => {
       var timer = setInterval(()=>setDate(new Date()), 1000 )
