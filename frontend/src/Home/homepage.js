@@ -41,7 +41,10 @@ const GameCarousel = () => {
   // mainGameIndex keeps track for div elements, curMainGameIndex keeps track for callback to route
   const [mainGameIndex, setMainGameIndex] = useState(0);
   var curMainGameIndex = useRef(0);
-  const [transition, setTransition] = useState("");
+
+  // Tracks name and background transition
+  const [backgroundTransition, setBackgroundTransition] = useState("");
+  const [nameTransition, setNameTransition] = useState("");
 
   // Execute event based on key pressed
   const handleKeyDown = useCallback((event) => {
@@ -51,46 +54,54 @@ const GameCarousel = () => {
       return;
     }
 
-    // remove event listener so user cannot scroll during a current scroll
-    window.removeEventListener('keydown', handleKeyDown);
-
-    // Retrieve current margin
-    const computedStyle = window.getComputedStyle(carouselRef.current);
-    var marginLeft = computedStyle.getPropertyValue('margin-left');
-    marginLeft = parseInt(marginLeft, 10);
-
     // Add to margin based on left/right key pressed, and set the new main game hovered
-    if (event.key === 'ArrowLeft' && marginLeft < 50) {
-      marginLeft += 210;
+    if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+      // remove event listener so user cannot scroll during a current scroll
+      window.removeEventListener('keydown', handleKeyDown);
 
-      curMainGameIndex.current -= 1;
-      setMainGameIndex((prevIndex) => prevIndex - 1);
+      // Retrieve current margin
+      const computedStyle = window.getComputedStyle(carouselRef.current);
+      var marginLeft = computedStyle.getPropertyValue('margin-left');
+      marginLeft = parseInt(marginLeft, 10);
 
-      // Add background transition
-      setTransition("animation");
+      // Shift left
+      if (event.key === 'ArrowLeft' && marginLeft < 50) {
+        marginLeft += 210;
+
+        curMainGameIndex.current -= 1;
+        setMainGameIndex((prevIndex) => prevIndex - 1);
+
+        // Add background and name transition
+        setBackgroundTransition("backgroundTransition");
+        setNameTransition("nameTransition");
+        setTimeout(() => {
+          setBackgroundTransition("");
+          setNameTransition("");
+        }, 200);
+      }
+
+      // Shift right
+      else if (event.key === 'ArrowRight' && marginLeft > -(gameCount*210 - 50)) {
+        marginLeft -= 210;
+
+        curMainGameIndex.current += 1;
+        setMainGameIndex((prevIndex) => prevIndex + 1);
+
+        // Add background transition
+        setBackgroundTransition("backgroundTransition");
+        setNameTransition("nameTransition");
+        setTimeout(() => {
+          setBackgroundTransition("");
+          setNameTransition("");
+        }, 200);
+      }
+      carouselRef.current.style.marginLeft = `${marginLeft}px`;
+
+      // wait 0.4 seconds until user is allowed to scroll again
       setTimeout(() => {
-        setTransition("");
+        window.addEventListener('keydown', handleKeyDown);
       }, 200);
     }
-    else if (event.key === 'ArrowRight' && marginLeft > -(gameCount*210 - 50)) {
-      marginLeft -= 210;
-
-      curMainGameIndex.current += 1;
-      setMainGameIndex((prevIndex) => prevIndex + 1);
-
-      // Add background transition
-      setTransition("animation");
-      setTimeout(() => {
-        setTransition("");
-      }, 200);
-    }
-    carouselRef.current.style.marginLeft = `${marginLeft}px`;
-
-    // wait 0.4 seconds until user is allowed to scroll again
-    setTimeout(() => {
-      window.addEventListener('keydown', handleKeyDown);
-    }, 200);
-
   }, [navigate]);
 
   useEffect(() => {
@@ -111,10 +122,10 @@ const GameCarousel = () => {
           isMain={index === mainGameIndex}
         />
       ))}
-      <div className='mainGameTitle'>
+      <div className='mainGameTitle' id={nameTransition}>
         {games[mainGameIndex].name}
       </div>
-      <img className='homeBackground' id={transition} src={games[mainGameIndex].backgroundCover} alt='homeBackground' />
+      <img className='homeBackground' id={backgroundTransition} src={games[mainGameIndex].backgroundCover} alt='homeBackground' />
     </div>
   )
 }
