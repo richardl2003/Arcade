@@ -30,7 +30,7 @@ function Pacman() {
               Up
           </div>
           <div className="iconContainer">
-              <img className='icon' src={Right} alt='Right Leg'/>
+              <img className='icon' src={RightLeg} alt='Right Leg'/>
               Down
           </div>
         </div>
