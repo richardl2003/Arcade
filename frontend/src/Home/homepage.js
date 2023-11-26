@@ -36,7 +36,7 @@ function Homepage() {
 const GameCarousel = () => {
   let navigate = useNavigate();
   const carouselRef = useRef(null);
-  const gameCount = 5 // Max amount of games to scroll right to
+  const gameCount = 7 // Max amount of games to scroll right to
 
   // mainGameIndex keeps track for div elements, curMainGameIndex keeps track for callback to route
   const [mainGameIndex, setMainGameIndex] = useState(0);
