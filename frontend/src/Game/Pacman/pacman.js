@@ -1,9 +1,8 @@
 import './pacman.css';
-
-
 import Left from '../../Assets/Game/Controls/Left.png';
 import Right from '../../Assets/Game/Controls/Right.png';
-
+import LeftLeg from '../../Assets/Game/Controls/LeftLeg.png';
+import RightLeg from '../../Assets/Game/Controls/RightLeg.png';
 import CoverMouth from '../../Assets/Game/Controls/CoverMouth.png';
 
 
@@ -18,7 +17,7 @@ function Pacman() {
         <div className="row">
           <div className="iconContainer">
               <img className='icon' src={Left} alt='Left'/>
-              Move left
+              Move Left
           </div>
           <div className="iconContainer">
               <img className='icon' src={Right} alt='Right'/>
@@ -26,12 +25,19 @@ function Pacman() {
           </div>
         </div>
         <div className="row">
-          
+          <div className="iconContainer">
+              <img className='icon' src={LeftLeg} alt='Left Leg'/>
+              Up
+          </div>
+          <div className="iconContainer">
+              <img className='icon' src={Right} alt='Right Leg'/>
+              Down
+          </div>
         </div>
         <div className="row">
           <div className="iconContainer">
               <img className='icon' src={CoverMouth} alt='Cover Mouth'/>
-              Pause/Select
+              Exit
           </div>
         </div>
       </div>        
