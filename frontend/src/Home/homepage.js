@@ -126,7 +126,7 @@ const GameCarousel = () => {
         {games[mainGameIndex].name}
       </div>
       <img className='homeBackground' id={backgroundTransition} src={games[mainGameIndex].backgroundCover} alt='homeBackground' />
-      <img className="App-video-feed" src="http://localhost:5050/" alt="video stream" />
+      <embed className='endpoint' src="http://localhost:5050/templerun"/>
     </div>
   )
 }

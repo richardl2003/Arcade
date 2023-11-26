@@ -130,3 +130,8 @@
         opacity: 1;
     }
 }
+
+.endpoint {
+    height: 0;
+    width: 0;
+  }
