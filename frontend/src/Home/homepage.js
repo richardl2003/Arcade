@@ -77,7 +77,7 @@ const GameCarousel = () => {
       marginLeft = parseInt(marginLeft, 10);
 
       // Shift left
-      if (event.key === 'ArrowLeft' && marginLeft < 50) {
+      if (event.key === 'ArrowLeft' && curMainGameIndex.current > 0) {
         marginLeft += 210;
 
         curMainGameIndex.current -= 1;
@@ -93,7 +93,7 @@ const GameCarousel = () => {
       }
 
       // Shift right
-      else if (event.key === 'ArrowRight' && marginLeft > -(gameCount*210 - 50)) {
+      else if (event.key === 'ArrowRight' && curMainGameIndex.current < gameCount) {
         marginLeft -= 210;
 
         curMainGameIndex.current += 1;
