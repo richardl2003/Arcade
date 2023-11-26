@@ -11,11 +11,10 @@ import TwentyBackground from '../Assets/Game/2048/2048Background.png';
 import PacmanCover from '../Assets/Game/Pacman/PacmanCover.png';
 import PacmanBackground from '../Assets/Game/Pacman/PacmanBackground.png';
 import CrossyRoadCover from '../Assets/Game/CrossyRoad/CrossyRoadCover.png';
-import CrossyRoadBackground from '../Assets/Game/CrossyRoad/CrossyRoadBackground.png';
-import TetrisCover from '../Assets/Game/Tetris/TetrisCover.png';
-import TetrisBackground from '../Assets/Game/Tetris/TetrisBackground.png';
-import QWOPCover from '../Assets/Game/QWOP/QWOPCover.png';
-import QWOPBackground from '../Assets/Game/QWOP/QWOPBackground.png';
+import CrossyRoadBackground from '../Assets/Game/CrossyRoad/CrossyRoadBackground.jpeg';
+import TetrisCover from '../Assets/Game/Tetris/TetrisCover.jpeg';
+import TetrisBackground from '../Assets/Game/Tetris/TetrisBackground.jpg';
+import FlappyBird from "../Game/FlappyBird/flappybird";
 
 export const games = [
   { name: "Temple Run", cover: TempleRunCover, backgroundCover: TempleRunBackground, route: "/templerun" },
@@ -23,7 +22,6 @@ export const games = [
   { name: "Flappy Bird", cover: FlappyBirdCover, backgroundCover: FlappyBirdBackground, route: "/flappybird" },
   { name: "2048", cover: TwentyCover, backgroundCover: TwentyBackground, route: "/2048"},
   { name: "Pacman", cover: PacmanCover, backgroundCover: PacmanBackground, route: "/pacman"},
-  { name: "QWOP", cover: QWOPCover, backgroundCover: QWOPBackground, route: "/qwop"},
   { name: "Tetris", cover: TetrisCover, backgroundCover: TetrisBackground, route: "/tetris"},
   { name: "Crossy Road", cover: CrossyRoadCover, backgroundCover: CrossyRoadBackground, route: "/crossyroad" },
 ];
