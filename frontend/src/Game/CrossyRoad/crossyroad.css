@@ -1,0 +1,22 @@
+.crossy {
+    height: 100vh;
+  
+    display: flex;
+    flex-direction: row;
+    background-color: #282c34;
+  }
+  
+  .crossyGameContainer {
+    width: 734px;
+  }
+  
+  .crossyGame {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .endpoint {
+    height: 0;
+    width: 0;
+  }
+    
