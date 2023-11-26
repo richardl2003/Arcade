@@ -1,7 +1,6 @@
 import './mario.css';
 
 function Mario() {
-
   return (
     <div className="App">
       <div className="App-header">
@@ -10,7 +9,7 @@ function Mario() {
         </div>
         <div className="App-video">
           <h3>Video Stream</h3>
-          <img className="App-video-feed" src="http://localhost:5050/mario" alt="video stream" />
+          <embed className='endpoint' src="http://localhost:5050/mario"/>
         </div>        
       </div>
     </div>

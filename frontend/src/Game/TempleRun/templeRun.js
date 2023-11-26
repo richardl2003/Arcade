@@ -1,7 +1,6 @@
 import './templeRun.css';
 
 function TempleRun() {
-
   return (
     <div className="App">
       <div className="App-header">
@@ -10,7 +9,7 @@ function TempleRun() {
         </div>
         <div className="App-video">
           <h3>Video Stream</h3>
-          <img className="App-video-feed" src="http://localhost:5050/templerun" alt="video stream" />
+          <embed className='endpoint' src="http://localhost:5050/templerun"/>
         </div>        
       </div>
     </div>

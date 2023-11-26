@@ -53,4 +53,9 @@
       transform: rotate(360deg);
     }
   }
+
+  .endpoint {
+    height: 0;
+    width: 0;
+  }
   
