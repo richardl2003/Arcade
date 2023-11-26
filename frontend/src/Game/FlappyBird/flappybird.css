@@ -1,0 +1,22 @@
+.flappy {
+  height: 100vh;
+
+  display: flex;
+  flex-direction: row;
+  background-color: #282c34;
+}
+
+.flappyGameContainer {
+  width: 734px;
+}
+
+.flappyGame {
+  width: 100%;
+  height: 100%;
+}
+
+.endpoint {
+  height: 0;
+  width: 0;
+}
+  

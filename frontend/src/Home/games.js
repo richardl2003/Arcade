@@ -10,6 +10,11 @@ import TwentyCover from '../Assets/Game/2048/2048Cover.png';
 import TwentyBackground from '../Assets/Game/2048/2048Background.png';
 import PacmanCover from '../Assets/Game/Pacman/PacmanCover.png';
 import PacmanBackground from '../Assets/Game/Pacman/PacmanBackground.png';
+import CrossyRoadCover from '../Assets/Game/CrossyRoad/CrossyRoadCover.png';
+import CrossyRoadBackground from '../Assets/Game/CrossyRoad/CrossyRoadBackground.jpeg';
+import TetrisCover from '../Assets/Game/Tetris/TetrisCover.jpeg';
+import TetrisBackground from '../Assets/Game/Tetris/TetrisBackground.jpg';
+import FlappyBird from "../Game/FlappyBird/flappybird";
 
 export const games = [
   { name: "Temple Run", cover: TempleRunCover, backgroundCover: TempleRunBackground, route: "/templerun" },
@@ -17,11 +22,8 @@ export const games = [
   { name: "Flappy Bird", cover: FlappyBirdCover, backgroundCover: FlappyBirdBackground, route: "/flappybird" },
   { name: "2048", cover: TwentyCover, backgroundCover: TwentyBackground, route: "/2048"},
   { name: "Pacman", cover: PacmanCover, backgroundCover: PacmanBackground, route: "/pacman"},
-  { name: "Temple Run", cover: TempleRunCover, backgroundCover: TempleRunBackground, route: "/templerun"},
-  { name: "Mario", cover: MarioCover, route: "/mario"},
-  { name: "Flappy Bird", cover: FlappyBirdCover, route: "/flappyBird" },
-  { name: "2048", cover: TwentyCover, route: "/2048"},
-  { name: "Pacman", cover: PacmanCover, route: "/pacman"}
+  { name: "Tetris", cover: TetrisCover, backgroundCover: TetrisBackground, route: "/tetris"},
+  { name: "Crossy Road", cover: CrossyRoadCover, backgroundCover: CrossyRoadBackground, route: "/crossyroad" },
 ];
 
 export const routes = [
@@ -35,6 +37,11 @@ export const routes = [
     path: '/mario',
     element: <Mario/>,
   },
+  {
+    id: 3,
+    path: '/flappybird',
+    element: <FlappyBird/>
+  }
 ]
 
 export default games;
