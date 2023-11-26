@@ -12,12 +12,12 @@ def index():
     return render_template('App.js')
                
 @app.route('/templerun')
-def mario():
+def templerun():
     try:
         subprocess.run(['python -m templerun.csv -f 1 -l 1'], check=True)
     except subprocess.CalledProcessError as e:
         print(f"An error occurred: {e}")
-    return render_template('mario.js')
+    return render_template('templerun.js')
 
 @app.route('/mario')
 def mario():
@@ -28,7 +28,7 @@ def mario():
     return render_template('mario.js')
 
 @app.route('/flappybird')
-def mario():
+def flappybird():
     try:
         subprocess.run(['python -m flappybird.csv -f 1 -l 1'], check=True)
     except subprocess.CalledProcessError as e:
@@ -36,7 +36,7 @@ def mario():
     return render_template('mario.js')
 
 @app.route('/2048')
-def mario():
+def game2048():
     try:
         subprocess.run(['python -m 2048.csv -f 1 -l 1'], check=True)
     except subprocess.CalledProcessError as e:
@@ -44,7 +44,7 @@ def mario():
     return render_template('mario.js')
 
 @app.route('/pacman')
-def mario():
+def pacman():
     try:
         subprocess.run(['python -m pacman.csv -f 1 -l 1'], check=True)
     except subprocess.CalledProcessError as e:
