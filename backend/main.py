@@ -71,5 +71,35 @@ def pacman():
         print(f"An error occurred: {e}")
     return "1"
 
+@app.route('/crossyroad')
+def crossyroad():
+    stop_current_process()
+    try:
+        global current_process
+        current_process = subprocess.Popen('python play.py -m crossyroad.csv -f 1 -l 1')
+    except subprocess.CalledProcessError as e:
+        print(f"An error occurred: {e}")
+    return "1"
+
+@app.route('/spaceinvaders')
+def spaceinvaders():
+    stop_current_process()
+    try:
+        global current_process
+        current_process = subprocess.Popen('python play.py -m spaceinvaders.csv -f 1 -l 1')
+    except subprocess.CalledProcessError as e:
+        print(f"An error occurred: {e}")
+    return "1"
+
+@app.route('/tetris')
+def tetris():
+    stop_current_process()
+    try:
+        global current_process
+        current_process = subprocess.Popen('python play.py -m tetris.csv -f 1 -l 1')
+    except subprocess.CalledProcessError as e:
+        print(f"An error occurred: {e}")
+    return "1"
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5050, threaded=True, use_reloader=False)
