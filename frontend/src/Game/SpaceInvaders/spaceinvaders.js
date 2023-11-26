@@ -1,10 +1,17 @@
+import { useNavigate } from 'react-router-dom';
+import Exit from '../../Assets/Game/Controls/Exit.png';
 import './spaceinvaders.css';
 import LeftLeg from '../../Assets/Game/Controls/LeftLeg.png';
 import RightLeg from '../../Assets/Game/Controls/RightLeg.png';
-import CoverMouth from '../../Assets/Game/Controls/CoverMouth.png';
 import CrossArms from '../../Assets/Game/Controls/CrossArms.png';
 
 function SpaceInvaders() {
+  let navigate = useNavigate();
+
+  const redirectHome = () =>{ 
+    navigate("/");
+  }
+
   return (
     <div className="spaceInvaders">
       <div className='gameContainer'>
@@ -28,8 +35,7 @@ function SpaceInvaders() {
               Fire
           </div>
           <div className="iconContainer">
-              <img className='icon' src={CoverMouth} alt='Cover Mouth'/>
-              Exit
+            <img className="exitButton" src={Exit} onClick={redirectHome} alt="Exit Button"/>
           </div>
         </div>
       </div>        

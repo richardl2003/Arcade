@@ -1,11 +1,18 @@
+import { useNavigate } from 'react-router-dom';
+import Exit from '../../Assets/Game/Controls/Exit.png';
 import './twenty.css';
 import Left from '../../Assets/Game/Controls/Left.png';
 import Right from '../../Assets/Game/Controls/Right.png';
 import Jump from '../../Assets/Game/Controls/Jump.png';
 import Squat from '../../Assets/Game/Controls/Squat.png';
-import CoverMouth from '../../Assets/Game/Controls/CoverMouth.png';
 
 function Twenty() {
+  let navigate = useNavigate();
+
+  const redirectHome = () =>{ 
+    navigate("/");
+  }
+
   return (
     <div className="twenty">
       <div className='gameContainer'>
@@ -35,8 +42,7 @@ function Twenty() {
         </div>
         <div className="row">
           <div className="iconContainer">
-              <img className='icon' src={CoverMouth} alt='Cover Mouth'/>
-              Exit
+            <img className="exitButton" src={Exit} onClick={redirectHome} alt="Exit Button"/>
           </div>
         </div>
       </div>        

@@ -1,12 +1,19 @@
+import { useNavigate } from 'react-router-dom';
+import Exit from '../../Assets/Game/Controls/Exit.png';
 import './pacman.css';
 import Left from '../../Assets/Game/Controls/Left.png';
 import Right from '../../Assets/Game/Controls/Right.png';
 import LeftLeg from '../../Assets/Game/Controls/LeftLeg.png';
 import RightLeg from '../../Assets/Game/Controls/RightLeg.png';
-import CoverMouth from '../../Assets/Game/Controls/CoverMouth.png';
 
 
 function Pacman() {
+  let navigate = useNavigate();
+
+  const redirectHome = () =>{ 
+    navigate("/");
+  }
+
   return (
     <div className="templeRun">
       <div className='gameContainer'>
@@ -36,8 +43,7 @@ function Pacman() {
         </div>
         <div className="row">
           <div className="iconContainer">
-              <img className='icon' src={CoverMouth} alt='Cover Mouth'/>
-              Exit
+            <img className="exitButton" src={Exit} onClick={redirectHome} alt="Exit Button"/>
           </div>
         </div>
       </div>        

@@ -1,12 +1,19 @@
+import { useNavigate } from 'react-router-dom';
+import Exit from '../../Assets/Game/Controls/Exit.png';
 import './crossyroad.css';
 import Left from '../../Assets/Game/Controls/Left.png';
 import Right from '../../Assets/Game/Controls/Right.png';
 import Jump from '../../Assets/Game/Controls/Jump.png';
 import Squat from '../../Assets/Game/Controls/Squat.png';
-import CoverMouth from '../../Assets/Game/Controls/CoverMouth.png';
 import CrossArms from '../../Assets/Game/Controls/CrossArms.png';
 
 function CrossyRoad() {
+  let navigate = useNavigate();
+
+  const redirectHome = () =>{ 
+    navigate("/");
+  }
+
   return (
     <div className="crossyRoad">
       <div className='gameContainer'>
@@ -40,8 +47,7 @@ function CrossyRoad() {
               Jump
           </div>
           <div className="iconContainer">
-              <img className='icon' src={CoverMouth} alt='Cover Mouth'/>
-              Exit
+            <img className="exitButton" src={Exit} onClick={redirectHome} alt="Exit Button"/>
           </div>
         </div>
       </div>        
