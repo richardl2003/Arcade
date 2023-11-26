@@ -19,4 +19,28 @@
   height: 0;
   width: 0;
 }
+
+.instructionsContainer {
+  display: flex;
+  flex-direction: column;
+  flex:1;
+
+  margin: 350px 40px 0 40px;
+
+  color: black;
+}
+
+.armRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.leftArmContainer {
+  display: flex;
+  align-items: center;
+}
+
+.leftArmIcon {
+  height: 100px;
+}
   
