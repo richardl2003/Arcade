@@ -131,7 +131,7 @@ const GameCarousel = () => {
   )
 }
 
-const Game = ({name, cover, backgroundCover, isMain}) => {
+const Game = ({name, cover, isMain}) => {
   return (
     <img className='gameCover' id={isMain ? 'mainGame' : ''} src={cover} alt={`${name}`}/>
   );
