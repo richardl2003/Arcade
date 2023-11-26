@@ -3,7 +3,7 @@ from contextlib import ExitStack
 import csv
 from screeninfo import get_monitors
 import keyboard # local fork
-
+import time
 import mediapipe as mp
 import cv2
 
@@ -316,6 +316,7 @@ def process_poses(image, pose_models, draw_landmarks, flip, display_only):
 
 
 def main():
+  #time.sleep(10)
   global last_frames, last_keys, frame_midpoint
 
   parser = argparse.ArgumentParser()
@@ -352,8 +353,8 @@ def main():
       screen_height = max(screen_height, monitor.height)
 
   # Position the window in the top right corner
-  offset_x = 10  # Adjust this value to control the gap from the right edge
-  offset_y = -10  # Adjust this value to control the gap from the top edge
+  offset_x = 0  # Adjust this value to control the gap from the right edge
+  offset_y = -40  # Adjust this value to control the gap from the top edge
   center_x = screen_width - new_width - offset_x
   center_y = offset_y
 
