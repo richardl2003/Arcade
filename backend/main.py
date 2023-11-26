@@ -1,22 +1,57 @@
 from flask import Flask, render_template, Response
 from camera import VideoCamera
+import subprocess
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
+    try:
+        subprocess.run(['python -m navigation.csv -f 1 -l 1'], check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"An error occurred: {e}")
     return render_template('App.js')
-    
-def gen(camera):
-    while True:
-        frame = camera.get_frame()
-        yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
                
-@app.route('/video_feed')
-def video_feed():
-    return Response(gen(VideoCamera()),
-                    mimetype='multipart/x-mixed-replace; boundary=frame')
+@app.route('/templerun')
+def mario():
+    try:
+        subprocess.run(['python -m templerun.csv -f 1 -l 1'], check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"An error occurred: {e}")
+    return render_template('mario.js')
+
+@app.route('/mario')
+def mario():
+    try:
+        subprocess.run(['python -m mario.csv -f 1 -l 1'], check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"An error occurred: {e}")
+    return render_template('mario.js')
+
+@app.route('/flappybird')
+def mario():
+    try:
+        subprocess.run(['python -m flappybird.csv -f 1 -l 1'], check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"An error occurred: {e}")
+    return render_template('mario.js')
+
+@app.route('/2048')
+def mario():
+    try:
+        subprocess.run(['python -m 2048.csv -f 1 -l 1'], check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"An error occurred: {e}")
+    return render_template('mario.js')
+
+@app.route('/pacman')
+def mario():
+    try:
+        subprocess.run(['python -m pacman.csv -f 1 -l 1'], check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"An error occurred: {e}")
+    return render_template('mario.js')
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5050, threaded=True, use_reloader=False)
