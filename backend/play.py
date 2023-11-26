@@ -2,7 +2,7 @@ import argparse
 from contextlib import ExitStack
 import csv
 
-from keyboard import keyboard # local fork
+import keyboard # local fork
 
 import mediapipe as mp
 import cv2
