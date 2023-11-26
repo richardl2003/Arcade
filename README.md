@@ -1,10 +1,16 @@
-<img src="logo.png" title="Arcade logo" width="40%"/>
+<div style="text-align: center;">
+  <img src="./ReadMeAssets/logo.png" alt="Arcade logo" title="Arcade logo" width="50%" />
+</div>
 
 ## Inspiration
 Video games evolved when the Xbox Kinect was released in 2010 but for some reason we reverted back to controller based games. We are here to bring back the amazingness of movement controlled games with a new twist- re innovating how mobile games are played!
 
 ## What it does
 AR.cade uses a body part detection model to track movements that correspond to controls for classic games that are ran through an online browser. The user can choose from a variety of classic games such as temple run, super mario, and play them with their body movements. 
+
+<div style="text-align: center;">
+  <img src="./ReadMeAssets/Preview.png" alt="Arcade demo" title="Arcade demo" width="100%" />
+</div>
 
 ## How we built it
 - The first step was setting up opencv and importing the a body part tracking model from google mediapipe
