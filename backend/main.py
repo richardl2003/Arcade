@@ -1,4 +1,4 @@
-from flask import Flask, render_template, Response
+from flask import Flask, render_template
 from camera import VideoCamera
 import subprocess
 
@@ -51,7 +51,6 @@ def mario():
     except subprocess.CalledProcessError as e:
         print(f"An error occurred: {e}")
     return render_template('mario.js')
-
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5050, threaded=True, use_reloader=False)

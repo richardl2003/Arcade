@@ -316,29 +316,22 @@ def process_poses(image, pose_models, draw_landmarks, flip, display_only):
 def main():
   global last_frames, last_keys, frame_midpoint
 
-  # parser = argparse.ArgumentParser()
-  # parser.add_argument('--map', '-m', help='File to import for mapped keys')
-  # parser.add_argument('--input', '-i', help='Input video device or file (number or path), defaults to 0', default='0')
-  # parser.add_argument('--flip', '-f', help='Set to any value to flip resulting output (selfie view)')
-  # parser.add_argument('--landmarks', '-l', help='Set to any value to draw body landmarks')
-  # parser.add_argument('--record', '-r', help='Set to any value to save a timestamped AVI in current directory')
-  # parser.add_argument('--display', '-d', help='Set to any value to only visually display output rather than type')
-  # parser.add_argument('--split', '-s', help='Split the screen into a positive integer of separate regions, defaults to 1', default='1')
-  # args = parser.parse_args()
+  parser = argparse.ArgumentParser()
+  parser.add_argument('--map', '-m', help='File to import for mapped keys')
+  parser.add_argument('--input', '-i', help='Input video device or file (number or path), defaults to 0', default='0')
+  parser.add_argument('--flip', '-f', help='Set to any value to flip resulting output (selfie view)')
+  parser.add_argument('--landmarks', '-l', help='Set to any value to draw body landmarks')
+  parser.add_argument('--record', '-r', help='Set to any value to save a timestamped AVI in current directory')
+  parser.add_argument('--display', '-d', help='Set to any value to only visually display output rather than type')
+  parser.add_argument('--split', '-s', help='Split the screen into a positive integer of separate regions, defaults to 1', default='1')
+  args = parser.parse_args()
 
-  # INPUT = int(args.input) if args.input.isdigit() else args.input
-  # FLIP = args.flip is not None
-  # DRAW_LANDMARKS = args.landmarks is not None
-  # RECORDING = args.record is not None
-  # DISPLAY_ONLY = args.display is not None
-  # SPLIT = 1
-
-  INPUT = 0
-  FLIP = True
-  DRAW_LANDMARKS = True
-  RECORDING = False
-  DISPLAY_ONLY = False
-  SPLIT = 1
+  INPUT = int(args.input) if args.input.isdigit() else args.input
+  FLIP = args.flip is not None
+  DRAW_LANDMARKS = args.landmarks is not None
+  RECORDING = args.record is not None
+  DISPLAY_ONLY = args.display is not None
+  SPLIT = int(args.split)
 
   last_frames = SPLIT * [last_frames.copy()]
   last_keys = SPLIT * [[]]
@@ -351,20 +344,17 @@ def main():
   recording = cv2.VideoWriter(RECORDING_FILENAME,
     cv2.VideoWriter_fourcc(*'MJPG'), FPS, frame_size) if RECORDING else None
 
-  #MAP_FILE = args.map
-  MAP_FILE = "templerun.csv"
+  MAP_FILE = args.map
   map_keys(MAP_FILE, SPLIT)
 
   with ExitStack() as stack:
     pose_models = SPLIT*[stack.enter_context(mp.solutions.pose.Pose())]
-    
 
     while cap.isOpened():
       success, image = cap.read()
       if not success: break
 
       image = process_poses(image, pose_models, DRAW_LANDMARKS, FLIP, DISPLAY_ONLY)
-      
 
       if render_and_maybe_exit(image, recording):
         break
