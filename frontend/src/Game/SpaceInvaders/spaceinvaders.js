@@ -6,7 +6,7 @@ import CrossArms from '../../Assets/Game/Controls/CrossArms.png';
 
 function SpaceInvaders() {
   return (
-    <div className="space">
+    <div className="spaceInvaders">
       <div className='gameContainer'>
       <iframe title="space" src="https://freeinvaders.org" className="spaceGame" frameborder="0" scrolling="no"></iframe>
         <embed className='endpoint' src="http://localhost:5050/spaceinvaders"/>
